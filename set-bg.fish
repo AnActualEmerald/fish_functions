@@ -1,12 +1,12 @@
-# v0.2.0
-# Written by Emerald, last updated 3/12/21
+# v0.2.1
+# Written by Emerald, last updated 3/29/21
 
 function set-bg -d "Set the background image and creates a matching terminal color scheme"
-
-    if test -n (type feh | grep "could")
-        set -g feh
-    else if test -n (type nitrogen | grep "could")
+    # Test for nitrogen first, as it's preferred
+    if test -n (type nitrogen | grep "could")
         set -g nitrogen
+    else if test -n (type feh | grep "could")
+        set -g feh
     else
         echo "it appears you don't have either feh or nitrogen installed on your system"
         return
