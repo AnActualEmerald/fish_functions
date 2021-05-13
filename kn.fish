@@ -1,0 +1,30 @@
+# Code repurposed from `zoxide/templates/fish.txt`.
+
+
+function kn
+    set argc (count $argv)
+
+    if test $argc -eq 0
+        # no args provided, go to home dir
+        
+        cd $HOME
+    else if begin; test $argc -eq 1; and test "$argv[1]" = '-'; end
+        # only dash provided, go to previous location
+        
+        cd -
+    else
+        # otherwise, query _kn
+
+        # set RUST_LOG to 0 explicitly
+        # hacky but will do for now
+        set -l __kn_result (
+            begin;
+                set -x RUST_LOG 0;
+                command _kn query -- $argv;
+        end)
+ 
+        and if test -d "$__kn_result"
+            cd "$__kn_result"
+        end
+    end
+end
