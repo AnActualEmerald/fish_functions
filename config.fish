@@ -19,6 +19,8 @@ function config -d "Opens configuration files in default editor"
                 $EDITOR ~/.config/nvim/init.vim
             case alacritty
                 $EDITOR ~/.config/alacritty/alacritty.yml
+            case i3
+                $EDITOR ~/.config/i3/config
             case '*'
                 echo Not a recognized option: $file
         end
